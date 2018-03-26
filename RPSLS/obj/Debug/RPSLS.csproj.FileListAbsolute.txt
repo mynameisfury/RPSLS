@@ -1,0 +1,7 @@
+C:\Users\mynameisfury\Desktop\DevCodeCamp\Projects\C#\Exercises\RPSLS\RPSLS\bin\Debug\RPSLS.exe.config
+C:\Users\mynameisfury\Desktop\DevCodeCamp\Projects\C#\Exercises\RPSLS\RPSLS\bin\Debug\RPSLS.exe
+C:\Users\mynameisfury\Desktop\DevCodeCamp\Projects\C#\Exercises\RPSLS\RPSLS\bin\Debug\RPSLS.pdb
+C:\Users\mynameisfury\Desktop\DevCodeCamp\Projects\C#\Exercises\RPSLS\RPSLS\obj\Debug\RPSLS.csprojResolveAssemblyReference.cache
+C:\Users\mynameisfury\Desktop\DevCodeCamp\Projects\C#\Exercises\RPSLS\RPSLS\obj\Debug\RPSLS.csproj.CoreCompileInputs.cache
+C:\Users\mynameisfury\Desktop\DevCodeCamp\Projects\C#\Exercises\RPSLS\RPSLS\obj\Debug\RPSLS.exe
+C:\Users\mynameisfury\Desktop\DevCodeCamp\Projects\C#\Exercises\RPSLS\RPSLS\obj\Debug\RPSLS.pdb
