@@ -13,7 +13,8 @@ namespace RPSLS
         static void Main(string[] args)
         {
             Game game = new Game();
-
+            game.MainMenu();
+            game.ManageRounds();
             game.RunGame();
             Console.ReadLine();
             

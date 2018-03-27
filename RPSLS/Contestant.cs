@@ -27,7 +27,7 @@ namespace RPSLS
             LIZARD,
             SPOCK
         }
-        public string UserInput = Console.ReadLine();
+        
         public States Status = States.NONE;
 
         
@@ -38,9 +38,7 @@ namespace RPSLS
             choices.Add("paper");
             choices.Add("scissors");
             choices.Add("lizard");
-            choices.Add("spock");
-
-           
+            choices.Add("spock");          
         }
 
     }
