@@ -19,22 +19,22 @@ namespace RPSLS
         public void GetCPUChoice()
         {
             Random RandomNumber = new Random();
-            switch (RandomNumber.Next(0, contestant.choices.Count))
+            switch (RandomNumber.Next(0, 5))
             {
                 case 1:
-                    player1.Status = Contestant.States.ROCK;
+                    cpu.Status = Contestant.States.ROCK;
                     break;
                 case 2:
-                    player1.Status = Contestant.States.PAPER;
+                    cpu.Status = Contestant.States.PAPER;
                     break;
                 case 3:
-                    player1.Status = Contestant.States.SCISSORS;
+                    cpu.Status = Contestant.States.SCISSORS;
                     break;
                 case 4:
-                    player1.Status = Contestant.States.LIZARD;
+                    cpu.Status = Contestant.States.LIZARD;
                     break;
                 case 5:
-                    player1.Status = Contestant.States.SPOCK;
+                    cpu.Status = Contestant.States.SPOCK;
                     break;
             }
         }
@@ -109,11 +109,19 @@ namespace RPSLS
                     menu.MenuMessage = "You picked a human opponent";
                     menu.DisplayMessage();
                     ManageHumanRounds();
+
+                    Console.WriteLine("Final score:");
+                    Console.WriteLine("Player 1:" + player1.points);
+                    Console.WriteLine("Player 2:" + player2.points);
                     break;
                 case "cpu":                
                     menu.MenuMessage = "You picked a computer opponent";
                     menu.DisplayMessage();
                     ManageCPURounds();
+
+                    Console.WriteLine("Final score:");
+                    Console.WriteLine("Player 1:" + player1.points);
+                    Console.WriteLine("CPU:" + cpu.points);
                     break;
                 default:
                     menu.MenuMessage = "Invalid response.";
@@ -188,31 +196,31 @@ namespace RPSLS
         }
         public void Player1WinCheckAgainstCPU()
         {
-            if (player1.Status == player2.Status)
+            if (player1.Status == cpu.Status)
             {
                 Console.WriteLine("It's a tie");
             }
-            else if (player1.Status == Contestant.States.ROCK && (player2.Status == Contestant.States.SCISSORS || cpu.Status == Contestant.States.LIZARD))
+            else if (player1.Status == Contestant.States.ROCK && (cpu.Status == Contestant.States.SCISSORS || cpu.Status == Contestant.States.LIZARD))
             {
                 Console.WriteLine("Player 1 wins");
                 player1.points += 1;
             }
-            else if (player1.Status == Contestant.States.PAPER && (player2.Status == Contestant.States.ROCK || cpu.Status == Contestant.States.SPOCK))
+            else if (player1.Status == Contestant.States.PAPER && (cpu.Status == Contestant.States.ROCK || cpu.Status == Contestant.States.SPOCK))
             {
                 Console.WriteLine("Player 1 wins");
                 player1.points += 1;
             }
-            else if (player1.Status == Contestant.States.SCISSORS && (player2.Status == Contestant.States.PAPER || cpu.Status == Contestant.States.LIZARD))
+            else if (player1.Status == Contestant.States.SCISSORS && (cpu.Status == Contestant.States.PAPER || cpu.Status == Contestant.States.LIZARD))
             {
                 Console.WriteLine("Player 1 wins");
                 player1.points += 1;
             }
-            else if (player1.Status == Contestant.States.LIZARD && (player2.Status == Contestant.States.SPOCK || cpu.Status == Contestant.States.PAPER))
+            else if (player1.Status == Contestant.States.LIZARD && (cpu.Status == Contestant.States.SPOCK || cpu.Status == Contestant.States.PAPER))
             {
                 Console.WriteLine("Player 1 wins");
                 player1.points += 1;
             }
-            else if (player1.Status == Contestant.States.SPOCK && (player2.Status == Contestant.States.SCISSORS || cpu.Status == Contestant.States.ROCK))
+            else if (player1.Status == Contestant.States.SPOCK && (cpu.Status == Contestant.States.SCISSORS || cpu.Status == Contestant.States.ROCK))
             {
                 Console.WriteLine("Player 1 wins");
                 player1.points += 1;
@@ -223,27 +231,27 @@ namespace RPSLS
         {
             if (cpu.Status == Contestant.States.ROCK && (player1.Status == Contestant.States.SCISSORS || player1.Status == Contestant.States.LIZARD))
             {
-                Console.WriteLine("Player 2 wins");
+                Console.WriteLine("CPU wins");
                 cpu.points += 1;
             }
             else if (cpu.Status == Contestant.States.PAPER && (player1.Status == Contestant.States.ROCK || player1.Status == Contestant.States.SPOCK))
             {
-                Console.WriteLine("Player 2 wins");
+                Console.WriteLine("CPU wins");
                 cpu.points += 1;
             }
             else if (cpu.Status == Contestant.States.SCISSORS && (player1.Status == Contestant.States.PAPER || player1.Status == Contestant.States.LIZARD))
             {
-                Console.WriteLine("Player 2 wins");
+                Console.WriteLine("CPU wins");
                 cpu.points += 1;
             }
             else if (cpu.Status == Contestant.States.LIZARD && (player1.Status == Contestant.States.SPOCK || player1.Status == Contestant.States.PAPER))
             {
-                Console.WriteLine("Player 2 wins");
+                Console.WriteLine("CPU wins");
                 cpu.points += 1;
             }
             else if (cpu.Status == Contestant.States.SPOCK && (player1.Status == Contestant.States.SCISSORS || player1.Status == Contestant.States.ROCK))
             {
-                Console.WriteLine("Player 2 wins");
+                Console.WriteLine("CPU wins");
                 cpu.points += 1;
             }
 
@@ -308,9 +316,6 @@ namespace RPSLS
 
 
 
-            Console.WriteLine("Final score:");
-            Console.WriteLine("Player 1:" + player1.points);
-            Console.WriteLine("Player 2:" + player2.points);
 
         }
 
