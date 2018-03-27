@@ -17,7 +17,7 @@ namespace RPSLS
 
         public void GetPlayer1Choice()
         {
-            menu.MenuMessage = "Rock, paper, scissors, lizard or spock?";
+            menu.MenuMessage = "Player 1, rock, paper, scissors, lizard or spock?";
             menu.DisplayMessage();
 
             switch (Console.ReadLine())
@@ -48,7 +48,7 @@ namespace RPSLS
 
         public void GetPlayer2Choice()
         {
-            menu.MenuMessage = "Rock, paper, scissors, lizard or spock?";
+            menu.MenuMessage = "Player 2, rock, paper, scissors, lizard or spock?";
             menu.DisplayMessage();
 
             switch (Console.ReadLine())
@@ -84,6 +84,7 @@ namespace RPSLS
                 case "human":
                     menu.MenuMessage = "You picked a human opponent";
                     menu.DisplayMessage();
+                    ManageHumanRounds();
                     break;
                 case "cpu":                
                     menu.MenuMessage = "You picked a computer opponent";
@@ -97,11 +98,78 @@ namespace RPSLS
 
             }
         }
-        public void ManageRounds()
+
+        public void Player1WinCheck()
         {
-            GetPlayer1Choice();
-            GetPlayer2Choice();
-            if (player1.Status ==  player2.Status)
+            if (player1.Status == Contestant.States.ROCK && (player2.Status == Contestant.States.SCISSORS || player2.Status == Contestant.States.LIZARD))
+            {
+                Console.WriteLine("Player 1 wins");
+                player1.points += 1;
+            }
+            else if (player1.Status == Contestant.States.PAPER && (player2.Status == Contestant.States.ROCK || player2.Status == Contestant.States.SPOCK))
+            {
+                Console.WriteLine("Player 1 wins");
+                player1.points += 1;
+            }
+            else if (player1.Status == Contestant.States.SCISSORS && (player2.Status == Contestant.States.PAPER || player2.Status == Contestant.States.LIZARD))
+            {
+                Console.WriteLine("Player 1 wins");
+                player1.points += 1;
+            }
+            else if (player1.Status == Contestant.States.LIZARD && (player2.Status == Contestant.States.SPOCK || player2.Status == Contestant.States.PAPER))
+            {
+                Console.WriteLine("Player 1 wins");
+                player1.points += 1;
+            }
+            else if (player1.Status == Contestant.States.SPOCK && (player2.Status == Contestant.States.SCISSORS || player2.Status == Contestant.States.ROCK))
+            {
+                Console.WriteLine("Player 1 wins");
+                player1.points += 1;
+            }
+        }
+
+        public void Player2WinCheck()
+        {
+            if (player2.Status == Contestant.States.ROCK && (player1.Status == Contestant.States.SCISSORS || player1.Status == Contestant.States.LIZARD))
+            {
+                Console.WriteLine("Player 2 wins");
+                player2.points += 1;
+            }
+            else if (player2.Status == Contestant.States.PAPER && (player1.Status == Contestant.States.ROCK || player1.Status == Contestant.States.SPOCK))
+            {
+                Console.WriteLine("Player 2 wins");
+                player2.points += 1;
+            }
+            else if (player2.Status == Contestant.States.SCISSORS && (player1.Status == Contestant.States.PAPER || player1.Status == Contestant.States.LIZARD))
+            {
+                Console.WriteLine("Player 2 wins");
+                player2.points += 1;
+            }
+            else if (player2.Status == Contestant.States.LIZARD && (player1.Status == Contestant.States.SPOCK || player1.Status == Contestant.States.PAPER))
+            {
+                Console.WriteLine("Player 2 wins");
+                player2.points += 1;
+            }
+            else if (player2.Status == Contestant.States.SPOCK && (player1.Status == Contestant.States.SCISSORS || player1.Status == Contestant.States.ROCK))
+            {
+                Console.WriteLine("Player 2 wins");
+                player2.points += 1;
+            }
+        }
+
+
+        public void ManageHumanRounds()
+        {
+            
+                GetPlayer1Choice();
+                GetPlayer2Choice();
+                Player1WinCheck();
+                Player2WinCheck();
+                
+
+
+         
+            if (player1.Status == player2.Status)
             {
                 Console.WriteLine("It's a tie");
             }
@@ -110,7 +178,7 @@ namespace RPSLS
         public void RunGame()
         {
 
-            ManageRounds();
+           
 
             
 

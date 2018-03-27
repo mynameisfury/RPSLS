@@ -14,7 +14,6 @@ namespace RPSLS
         {
             Game game = new Game();
             game.MainMenu();
-            game.ManageRounds();
             game.RunGame();
             Console.ReadLine();
             
