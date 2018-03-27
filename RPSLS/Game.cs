@@ -14,6 +14,30 @@ namespace RPSLS
         Player player2 = new Player();
         CpuOpponent cpu = new CpuOpponent();
         Menu menu = new Menu();
+        public int VictoryCondition = 2;
+
+        public void GetCPUChoice()
+        {
+            Random RandomNumber = new Random();
+            switch (RandomNumber.Next(0, contestant.choices.Count))
+            {
+                case 1:
+                    player1.Status = Contestant.States.ROCK;
+                    break;
+                case 2:
+                    player1.Status = Contestant.States.PAPER;
+                    break;
+                case 3:
+                    player1.Status = Contestant.States.SCISSORS;
+                    break;
+                case 4:
+                    player1.Status = Contestant.States.LIZARD;
+                    break;
+                case 5:
+                    player1.Status = Contestant.States.SPOCK;
+                    break;
+            }
+        }
 
         public void GetPlayer1Choice()
         {
@@ -89,6 +113,7 @@ namespace RPSLS
                 case "cpu":                
                     menu.MenuMessage = "You picked a computer opponent";
                     menu.DisplayMessage();
+                    ManageCPURounds();
                     break;
                 default:
                     menu.MenuMessage = "Invalid response.";
@@ -101,7 +126,11 @@ namespace RPSLS
 
         public void Player1WinCheck()
         {
-            if (player1.Status == Contestant.States.ROCK && (player2.Status == Contestant.States.SCISSORS || player2.Status == Contestant.States.LIZARD))
+            if (player1.Status == player2.Status)
+            {
+                Console.WriteLine("It's a tie");
+            }
+            else if (player1.Status == Contestant.States.ROCK && (player2.Status == Contestant.States.SCISSORS || player2.Status == Contestant.States.LIZARD))
             {
                 Console.WriteLine("Player 1 wins");
                 player1.points += 1;
@@ -130,7 +159,7 @@ namespace RPSLS
 
         public void Player2WinCheck()
         {
-            if (player2.Status == Contestant.States.ROCK && (player1.Status == Contestant.States.SCISSORS || player1.Status == Contestant.States.LIZARD))
+             if (player2.Status == Contestant.States.ROCK && (player1.Status == Contestant.States.SCISSORS || player1.Status == Contestant.States.LIZARD))
             {
                 Console.WriteLine("Player 2 wins");
                 player2.points += 1;
@@ -155,35 +184,133 @@ namespace RPSLS
                 Console.WriteLine("Player 2 wins");
                 player2.points += 1;
             }
+
+        }
+        public void Player1WinCheckAgainstCPU()
+        {
+            if (player1.Status == player2.Status)
+            {
+                Console.WriteLine("It's a tie");
+            }
+            else if (player1.Status == Contestant.States.ROCK && (player2.Status == Contestant.States.SCISSORS || cpu.Status == Contestant.States.LIZARD))
+            {
+                Console.WriteLine("Player 1 wins");
+                player1.points += 1;
+            }
+            else if (player1.Status == Contestant.States.PAPER && (player2.Status == Contestant.States.ROCK || cpu.Status == Contestant.States.SPOCK))
+            {
+                Console.WriteLine("Player 1 wins");
+                player1.points += 1;
+            }
+            else if (player1.Status == Contestant.States.SCISSORS && (player2.Status == Contestant.States.PAPER || cpu.Status == Contestant.States.LIZARD))
+            {
+                Console.WriteLine("Player 1 wins");
+                player1.points += 1;
+            }
+            else if (player1.Status == Contestant.States.LIZARD && (player2.Status == Contestant.States.SPOCK || cpu.Status == Contestant.States.PAPER))
+            {
+                Console.WriteLine("Player 1 wins");
+                player1.points += 1;
+            }
+            else if (player1.Status == Contestant.States.SPOCK && (player2.Status == Contestant.States.SCISSORS || cpu.Status == Contestant.States.ROCK))
+            {
+                Console.WriteLine("Player 1 wins");
+                player1.points += 1;
+            }
+        }
+
+        public void CPUWinCheck()
+        {
+            if (cpu.Status == Contestant.States.ROCK && (player1.Status == Contestant.States.SCISSORS || player1.Status == Contestant.States.LIZARD))
+            {
+                Console.WriteLine("Player 2 wins");
+                cpu.points += 1;
+            }
+            else if (cpu.Status == Contestant.States.PAPER && (player1.Status == Contestant.States.ROCK || player1.Status == Contestant.States.SPOCK))
+            {
+                Console.WriteLine("Player 2 wins");
+                cpu.points += 1;
+            }
+            else if (cpu.Status == Contestant.States.SCISSORS && (player1.Status == Contestant.States.PAPER || player1.Status == Contestant.States.LIZARD))
+            {
+                Console.WriteLine("Player 2 wins");
+                cpu.points += 1;
+            }
+            else if (cpu.Status == Contestant.States.LIZARD && (player1.Status == Contestant.States.SPOCK || player1.Status == Contestant.States.PAPER))
+            {
+                Console.WriteLine("Player 2 wins");
+                cpu.points += 1;
+            }
+            else if (cpu.Status == Contestant.States.SPOCK && (player1.Status == Contestant.States.SCISSORS || player1.Status == Contestant.States.ROCK))
+            {
+                Console.WriteLine("Player 2 wins");
+                cpu.points += 1;
+            }
+
         }
 
 
         public void ManageHumanRounds()
         {
-            
+            int i = 0;
+            while (i < 100)
+            {
                 GetPlayer1Choice();
                 GetPlayer2Choice();
                 Player1WinCheck();
                 Player2WinCheck();
-                
+                if (player1.points == VictoryCondition)
+                {
+                    Console.WriteLine("Player 1 achieves grand victory");
+                    break;
+                }
+                if (player2.points == VictoryCondition)
+                {
+                    Console.WriteLine("Player 2 achieves grand victory");
+                    break;
+                }
+                i++;
 
 
-         
-            if (player1.Status == player2.Status)
-            {
-                Console.WriteLine("It's a tie");
             }
 
+
+        }
+
+
+        public void ManageCPURounds()
+        {
+            int i = 0;
+            while (i < 100)
+            {
+                GetPlayer1Choice();
+                GetCPUChoice();
+                Player1WinCheckAgainstCPU();
+                CPUWinCheck();
+                if (player1.points == VictoryCondition)
+                {
+                    Console.WriteLine("Player 1 achieves grand victory");
+                    break;
+                }
+                if (cpu.points == VictoryCondition)
+                {
+                    Console.WriteLine("Player 2 achieves grand victory");
+                    break;
+                }
+                i++;
+
+
+            }
         }
         public void RunGame()
         {
 
-           
 
-            
 
-            Console.WriteLine(player1.Status);
-            Console.WriteLine(player2.Status);
+
+            Console.WriteLine("Final score:");
+            Console.WriteLine("Player 1:" + player1.points);
+            Console.WriteLine("Player 2:" + player2.points);
 
         }
 
