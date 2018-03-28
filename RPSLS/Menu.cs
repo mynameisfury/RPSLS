@@ -9,8 +9,7 @@ namespace RPSLS
     class Menu
     {
         public string MenuMessage;
-        public string InputVerification;
-        //public string UserInput = Console.ReadLine();
+
 
         public void DisplayMessage()
         {

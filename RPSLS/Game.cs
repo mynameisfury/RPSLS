@@ -39,6 +39,40 @@ namespace RPSLS
             }
         }
 
+
+        public void MainMenu()
+        {
+            menu.MenuMessage = "Start game, select human or cpu";
+            menu.DisplayMessage();
+            switch (Console.ReadLine())
+            {
+                case "human":
+                    menu.MenuMessage = "You picked a human opponent";
+                    menu.DisplayMessage();
+                    ManageHumanRounds();
+
+                    Console.WriteLine("Final score:");
+                    Console.WriteLine("Player 1:" + player1.points);
+                    Console.WriteLine("Player 2:" + player2.points);
+                    break;
+                case "cpu":
+                    menu.MenuMessage = "You picked a computer opponent";
+                    menu.DisplayMessage();
+                    ManageCPURounds();
+
+                    Console.WriteLine("Final score:");
+                    Console.WriteLine("Player 1:" + player1.points);
+                    Console.WriteLine("CPU:" + cpu.points);
+                    break;
+                default:
+                    menu.MenuMessage = "Invalid response.";
+                    menu.DisplayMessage();
+                    MainMenu();
+                    break;
+
+            }
+        }
+
         public void GetPlayer1Choice()
         {
             menu.MenuMessage = "Player 1, rock, paper, scissors, lizard or spock?";
@@ -100,37 +134,7 @@ namespace RPSLS
             }
         }
 
-        public void MainMenu()
-        {
-            menu.MenuMessage = "Start game, select human or cpu";
-            menu.DisplayMessage();
-            switch (Console.ReadLine()) {
-                case "human":
-                    menu.MenuMessage = "You picked a human opponent";
-                    menu.DisplayMessage();
-                    ManageHumanRounds();
-
-                    Console.WriteLine("Final score:");
-                    Console.WriteLine("Player 1:" + player1.points);
-                    Console.WriteLine("Player 2:" + player2.points);
-                    break;
-                case "cpu":                
-                    menu.MenuMessage = "You picked a computer opponent";
-                    menu.DisplayMessage();
-                    ManageCPURounds();
-
-                    Console.WriteLine("Final score:");
-                    Console.WriteLine("Player 1:" + player1.points);
-                    Console.WriteLine("CPU:" + cpu.points);
-                    break;
-                default:
-                    menu.MenuMessage = "Invalid response.";
-                    menu.DisplayMessage();
-                    MainMenu();
-                    break;
-
-            }
-        }
+      
 
         public void Player1WinCheck()
         {
@@ -302,7 +306,7 @@ namespace RPSLS
                 }
                 if (cpu.points == VictoryCondition)
                 {
-                    Console.WriteLine("Player 2 achieves grand victory");
+                    Console.WriteLine("CPU achieves grand victory");
                     break;
                 }
                 i++;
@@ -310,14 +314,6 @@ namespace RPSLS
 
             }
         }
-        public void RunGame()
-        {
-
-
-
-
-
-        }
-
+      
     }
 }
